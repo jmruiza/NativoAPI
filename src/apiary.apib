@@ -1,0 +1,172 @@
+FORMAT: 1A
+HOST: http://polls.apiblueprint.org/
+
+# nativo
+
+Polls is a simple API allowing consumers to view polls and vote in them.
+
+## Create users [/users]
+
+### Creates a user [POST]
+
++ Request (application/json)
+        
+        {
+            "token": "FB_HFG425",
+            "email": "halzate93@gmail.com",
+            "name": "Héctor Camilo Alzate",
+            "pass": "HASH_MD5",
+            "language": "ES"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "id": "DB_ASDFNKLE23",
+            "already_created": true
+        }
+
+
+## Retrieve user data [/users/{id}]
+
+### Gets the user data [GET]
+
++ Response 200 (application/json)
+
+        {
+            "user_name": "halzate93",
+            "token": "FB_HFG425",
+            "email": "halzate93@gmail.com",
+            "name": "Héctor Camilo Alzate",
+            "language": "ES",
+            "plan": "Free"
+        }
+        
+### Updates the user data [PUT]
+
++ Request (application/json)
+
+        {
+            "user_name": "halzate93",
+            "token": "FB_HFG425",
+            "email": "halzate93@gmail.com",
+            "name": "Héctor Camilo Alzate",
+            "language": "ES"
+        }
+        
++ Response 200
+
+
+## Completed sections in the game [/users/{id}/progress]
+
+### Gets the progress [GET]
+
++ Response 200 (application/json)
+
+        {
+            "power_ups": [
+                {
+                    "type": "fireball",
+                    "amount": 10
+                }
+            ],
+            "progress":
+            {
+                "level": 10,
+                "experience": 2000,
+                "worlds": [
+                    {
+                        "id": "HEX123",
+                        "status": "completed",
+                        "classes": [
+                            {
+                                "id": "HEX654",
+                                "stars": 3
+                            },
+                            {
+                                "id": "HEX654",
+                                "stars": 3
+                            },
+                            {
+                                "id": "HEX654",
+                                "stars": 3
+                            }
+                        ]
+                    },
+                    {
+                        "id": "HEX123",
+                        "status": "in-progress",
+                        "classes": [
+                            {
+                                "id": "HEX654",
+                                "stars": 3
+                            }
+                        ]
+                    }
+                    
+                ]
+            }
+        }
+        
+## Class [/user/{id}/progress/class]
+
+### Completes a class [POST]
+
++ Request (application/json)
+
+    
+        {
+            "world_id": "Planet01",
+            "class_id": "HEX_123",
+            "stars": 3,
+            "powerup": {
+                "type": "fireball",
+                "amount": 2
+            }
+        }
+        
++ Response 200
+      
+## Sets the user as interested in a new section [/user/{id}/interests]
+
+### Suscribes a user [POST]
+
++ Request (application/json)
+
+        {
+            "section": "shop"
+        }
+
++ Response 200
+
+## Describes the content of the application in worlds and stops [/planets]
+
+### Retrieves the latest version of the content [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": "HEX123",
+                "name":"HTML",
+                "image": "planets/html",
+                "monster": "monster/cockroach",
+                "classes": [
+                    {
+                        "name":"Official Intro GONATIVO",
+                        "resource":{
+                            "type":"Video",
+                            "resourceJson":"{ \"seconds\": 92, \"url\": \"file:///Users/monik/Downloads/NativoApp/Assets/StreamingAssets/nativointro.mp4\", \"description\": \"And it is OUT! We are almost ready to impact an entire planet!Check out the reel, sign up for FREE and start PLAYING and LEARNING!\",\"name\": \"Official Intro GONATIVO\" }"
+                        },
+                        "game": {
+                            "type": "trivia",
+                            "gameJson": "{}",
+                            "messages": {
+                                "ok": "Nice one!",
+                                "mistake": "Remember to study html!"
+                            }
+                        }
+                    }
+                ]
+            }
+        ]
